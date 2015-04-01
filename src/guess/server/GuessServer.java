@@ -21,20 +21,20 @@ public class GuessServer {
         new GuessServer(12345).execute();
     }
 
-    private int porta;
+    private int port;
     
-    public GuessServer (int porta) {
-        this.porta = porta;
+    public GuessServer (int port) {
+        this.port = port;
         
     }
    
     public void  execute () throws IOException, ClassNotFoundException {
-        ServerSocket servidor = new ServerSocket(this.porta);
+        ServerSocket server = new ServerSocket(this.port);
         System.out.println("Connection opened on port 12345!");
         Game game = new Game();
         
         while (true) {
-            Socket cliente = servidor.accept();
+            Socket cliente = server.accept();
             System.out.println("New connection with client " + cliente.getInetAddress().getHostAddress());
             
             ServerThread r = new ServerThread(cliente.getInputStream(), cliente.getOutputStream(), game);
