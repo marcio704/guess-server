@@ -25,7 +25,6 @@ public class GuessServer {
     
     public GuessServer (int port) {
         this.port = port;
-        
     }
    
     public void  execute () throws IOException, ClassNotFoundException {

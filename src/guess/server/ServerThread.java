@@ -5,7 +5,7 @@
  */
 package guess.server;
 
-import guess.client.Client;
+import guess.client.dto.Guess;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -37,7 +37,7 @@ import java.util.logging.Logger;
             
             boolean stopTrying = false;
             do {
-                Client clientGuess = (Client) ois.readObject();   
+                Guess clientGuess = (Guess) ois.readObject();   
                 stopTrying = game.isGuessRight(clientGuess, oos);
             } while (!stopTrying);
         } catch (IOException | ClassNotFoundException ex) {

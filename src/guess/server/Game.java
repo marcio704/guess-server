@@ -1,15 +1,9 @@
 package guess.server;
 
-import guess.client.Client;
+import guess.client.dto.Guess;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -44,20 +38,20 @@ public class Game {
         return randomNumber;
     }
     
-    public synchronized boolean isGuessRight(Client clientGuess, ObjectOutputStream client) throws IOException {
+    public synchronized boolean isGuessRight(Guess clientGuess, ObjectOutputStream client) throws IOException {
         System.out.println("CLIENT " + clientGuess.getId() + " ATTEMPTING A GUESS OF " + clientGuess.getGuessNumber() + "!! DO I STOP THE GAME? " + isGameOver);
         if(isGameOver) {
             System.out.println("WE ALREADY HAVE A WINNER! STOP THE GAME FOR CLIENT " + clientGuess.getId());
-            client.writeObject("exit");
+            client.writeObject(Tip.OVER);
             return true;
         } else {
             if((isGameOver = clientGuess.getGuessNumber() == gameNumber)) {
                 System.out.println("WE HAVE A FIRST WINNER!!! Client " + clientGuess.getId());
-                client.writeObject("exit");
+                client.writeObject(Tip.WIN);
                 return true;
             }
             System.out.println("Client " + clientGuess.getId() + " wrong guess, try again!");
-            client.writeObject(new Tip(clientGuess.getGuessNumber() > gameNumber ? Tip.BELOW : Tip.ABOVE, clientGuess.getGuessNumber()));
+            client.writeObject(clientGuess.getGuessNumber() > gameNumber ? Tip.LESSER :  Tip.BIGGER);
             return false;
         }
     }

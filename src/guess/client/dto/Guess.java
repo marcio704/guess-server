@@ -1,4 +1,4 @@
-package guess.client;
+package guess.client.dto;
 
 
 import java.io.Serializable;
@@ -14,14 +14,12 @@ import java.util.Random;
  *
  * @author marcio
  */
-public class Client implements Serializable {
+public class Guess implements Serializable {
     
     private int id;
-    private int start;
-    private int end;
     private int guessNumber;
     
-    private static final long serialVersionUID = 6380051259455797804L;
+    private static final long serialVersionUID = 5627856554022993232L;
     
     public int getId() {
         return id;
@@ -38,22 +36,4 @@ public class Client implements Serializable {
     public void setGuessNumber(int guessNumber) {
         this.guessNumber = guessNumber;
     }
-
-    public int getStart() {
-        return start;
-    }
-
-    public void setStart(int start) {
-        this.start = start;
-    }
-
-    public int getEnd() {
-        return end;
-    }
-
-    public void setEnd(int end) {
-        this.end = end;
-    }
-    
-    
 }
